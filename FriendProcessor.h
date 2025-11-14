@@ -9,6 +9,6 @@ public:
     FriendProcessor();
     ~FriendProcessor();
     void displayMotors(const vector<ServoMotor>& motors);
-    void calculateEfficiency(const vector<ServoMotor>& motors);
+    void calculatePerformance(const vector<ServoMotor>& motors);
 };
 #endif

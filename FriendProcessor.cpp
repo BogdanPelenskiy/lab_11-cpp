@@ -14,13 +14,16 @@ void FriendProcessor::displayMotors(const vector<ServoMotor>& motors) {
     }
 }
 
-void FriendProcessor::calculateEfficiency(const vector<ServoMotor>& motors) {
-    cout << "\n===== Розрахунок ККД =====\n";
+void FriendProcessor::calculatePerformance(const vector<ServoMotor>& motors) {
+    cout << "\n===== Розрахунок ефективності =====\n";
     for (size_t i = 0; i < motors.size(); ++i) {
         const ServoMotor& m = motors[i];
-        double efficiency = 0;
+        double perf = 0;
+
         if (m.power > 0)
-            efficiency = (m.voltage * m.angle) / m.power;
-        cout << "Двигун " << m.model << ": ККД = " << efficiency << endl;
+            perf = (m.voltage * m.angle) / m.power;
+
+        cout << "Двигун " << m.model << ": Ефективність = " << perf << endl;
     }
 }
+
