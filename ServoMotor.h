@@ -11,6 +11,10 @@ public:
     ~ServoMotor();
     void input() override;
     void display() const override;
-    friend class FriendProcessor;
+
+    double calculateEfficiency() const override {
+        return (voltage * angle) / power;
+    }
 };
+
 #endif

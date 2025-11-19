@@ -1,14 +1,19 @@
 #ifndef FRIENDPROCESSOR_H
 #define FRIENDPROCESSOR_H
+
 #include <vector>
-#include "ServoMotor.h"
+#include "Engine.h"     // базовий клас двигуна
+
 using namespace std;
 
 class FriendProcessor {
 public:
     FriendProcessor();
     ~FriendProcessor();
-    void displayMotors(const vector<ServoMotor>& motors);
-    void calculatePerformance(const vector<ServoMotor>& motors);
+
+    // тепер приймає вектор вказівників на базовий клас Engine
+    void displayMotors(const vector<Engine*>& motors);
+    void calculatePerformance(const vector<Engine*>& motors);
 };
+
 #endif

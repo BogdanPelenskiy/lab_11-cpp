@@ -10,11 +10,9 @@ using namespace std;
 int main() {
     setlocale(LC_ALL, "uk_UA.UTF-8");
 
-    vector<ServoMotor> servoMotors;
-    vector<StepperMotor> stepperMotors;
+    vector<Engine*> motors; // 🔥 ЄДИНИЙ контейнер
 
     int n;
-
     cout << "Введіть кількість двигунів: ";
     while (!(cin >> n) || n <= 0) {
         cout << "Некоректне значення! Спробуйте ще раз: ";
@@ -28,7 +26,7 @@ int main() {
 
         int type;
         cout << "Оберіть тип двигуна:\n1 - Серводвигун\n2 - Кроковий двигун\nВаш вибір: ";
-        
+
         while (!(cin >> type) || (type != 1 && type != 2)) {
             cout << "Помилка! Введіть 1 або 2: ";
             cin.clear();
@@ -37,30 +35,25 @@ int main() {
         cin.ignore();
 
         if (type == 1) {
-            ServoMotor sm;
-            sm.input();
-            servoMotors.push_back(sm);
-        } 
+            auto* sm = new ServoMotor();
+            sm->input();
+            motors.push_back(sm);
+        }
         else {
-            StepperMotor st;
-            st.input();
-            stepperMotors.push_back(st);
+            auto* st = new StepperMotor();
+            st->input();
+            motors.push_back(st);
         }
     }
 
     FriendProcessor fp;
 
-    cout << "\n===== Серводвигуни =====\n";
-    fp.displayMotors(servoMotors);
+    fp.displayMotors(motors);
+    fp.calculatePerformance(motors);
 
-    cout << "\n===== Крокові двигуни =====\n";
-    fp.displayMotors(stepperMotors);
-
-    cout << "\n===== Ефективність серводвигунів =====\n";
-    fp.calculatePerformance(servoMotors);
-
-    cout << "\n===== Ефективність крокових двигунів =====\n";
-    fp.calculatePerformance(stepperMotors);
+    // 🔥 Звільняємо памʼять
+    for (auto m : motors)
+        delete m;
 
     return 0;
 }

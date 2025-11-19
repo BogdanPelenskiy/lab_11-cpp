@@ -9,12 +9,21 @@ protected:
     string model;
     double voltage;
     double power;
+
 public:
     Engine();
     Engine(string m, double v, double p);
     virtual ~Engine();
+
     virtual void input();
     virtual void display() const;
-    friend class FriendProcessor;
+
+    // 🔥 ОБОВʼЯЗКОВО для поліморфізму
+    virtual double calculateEfficiency() const = 0;
+
+    string getModel() const { return model; }
+    double getVoltage() const { return voltage; }
+    double getPower() const { return power; }
 };
+
 #endif
